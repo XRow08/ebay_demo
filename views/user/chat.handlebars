@@ -1,0 +1,99 @@
+{{>_menu}}
+<div class="sub-bar">
+    <div class="sub-update">
+        <p>Chats</p>
+    </div>
+    <div class="msg" align="center">
+        <p>{{>_msg}}</p>
+        {{#each erros}}
+        <p>{{text}}</p>
+        {{/each}}
+    </div>
+    {{#if error}}
+        <div class="msg">Dispute already exist</div>
+    {{/if}}
+</div>
+
+<div class="content-forchat">
+    <div class="content-chat">
+        <div class="product-chat">
+            <div class="img">
+                <img src="/uploads/{{purchase.productId.image}}" draggable="false">
+            </div>
+            <div class="about">
+                <h2>{{purchase.productId.title}}</h2>
+                <small>{{purchase.createdAt}}</small>
+                <small>Quantity: {{purchase.units}} itens</small>
+                <h3>R$ {{purchase.total}} </h3>
+            </div>
+        </div>
+        <div class="box-messages">
+            <div class="list-messages">
+                <ul class="ul" id="messages">
+                    <li class="li" id="li-messages"></li>
+                </ul>
+            </div>
+            {{#if purchase.open}}
+                <div class="send">
+                    <label for="file-input" class="uploadMax">
+                        <img src="/images/upload.svg" />
+                        <small>Max 1Mb</small>
+                    </label>
+                    <input id="file-input" type="file" oninput="uploadImg(this)" accept="image/png" value="1048576"/>
+                    <textarea class="text" autofocus="" id="menssagem" autocomplete="off" placeholder="Send a message"></textarea>
+                    <button class="btn" id="enviar_menssagem"><p>Send</p></button>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    {{#if purchase.open}}
+        <div class="buttons-chat">
+            <button class="wrong" id="wrong" style="display: none;"><p>Purchase not delivered</p></button>
+            <button class="timetosell" id="timetosell"><p id="timer">{{purchase.timeToSell}}</p></button>
+            <button class="allright" id="allright">
+                <p>Purchase received</p>
+            </button>
+        </div>
+    {{/if}}
+</div>
+<div class="popup-wrapper-chat" id="popup-wrapper-chat">
+    <div class="popup-chat">
+        <div class="popup-close" id="popup-close-chat">x</div>
+        <h2>Tell us the cause</h2>
+        <br>
+        <hr><br>
+        <textarea name="cause" cols="30" rows="10" id="menssagem_cause"></textarea>
+        <input type="hidden" name="buyerId" value="{{purchase.buyer._id._id}}">
+        <input type="hidden" name="sellerId" value="{{purchase.seller._id._id}}">
+        <button id="enviar_menssagem_cause">Send</button>
+        <button onclick="popupChat.style.display = 'none';" class="wrong">Cancel</button>
+    </div>
+</div>
+
+<div class="popup-wrapper-chat" id="popup-received">
+    <div class="popup-chat">
+        <div class="popup-close" id="popup-close-chat" onclick="popupReceived.style.display = 'none';">x</div>
+        <h2>Product received?</h2>
+        <br>
+        <hr><br>
+        <button onclick="confirmReceived()">Confirm</button>
+        <button onclick="popupReceived.style.display = 'none';" class="wrong">Cancel</button>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    window.nome_usuario = "{{ username }}";
+    window.time = {{ purchase.timeToSell }};
+    window.purchaseId = "{{ purchase._id }}";
+    window.userId = "{{ id }}";
+    window.sellerId = "{{purchase.seller._id._id}}";
+    window.buyerId = "{{purchase.buyer._id._id}}";
+    window.sellerName = "{{purchase.seller._id.username}}";
+    window.buyerName = "{{purchase.buyer._id.username}}";
+</script>
+{{#if purchase.open}}
+    <script src="/js/chat.js"></script>
+{{else}}
+    <script src="/js/chat-closed.js"></script>
+{{/if}}

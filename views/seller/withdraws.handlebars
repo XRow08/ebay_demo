@@ -1,0 +1,41 @@
+{{>_menuSeller}}
+<div class="sub-bar">
+  <p>My Withdraws</p>
+  <div class="msg">
+    <p>{{>_msg}}</p>
+  </div>
+</div>
+<div class="content">
+  <div class="deposits-admin" id="products">
+    <h1>All Withdraws</h1>
+    <div class="search">
+      <div class="left">
+        <small>Filter withdraws: </small>
+        <input type="text" id="myFilter" class="form-control" onkeyup="search()" placeholder="Search by a date...">
+      </div>
+      <small>{{withdraws.length}} Withdraws</small>
+    </div>
+    {{#each withdraws}}
+    <div class="card">
+      <div class="left">
+        <img src="/images/withdraw.svg" draggable="false">
+        <div class="key">
+          <small><strong class="title">Date: {{createdAt}}</strong></small>
+          {{#if wallet}}<small class="pix"><strong>Pix Key:</strong> {{wallet}}</small>{{/if}}
+          {{#if pixKey}}
+            <small class="pix"><strong>Pix Key:</strong> {{pixKey}}</small>
+          {{/if}}
+        </div>
+      </div>
+      <div class="right">
+        <small class="{{status}}">{{status}}</small>
+      </div>
+    </div>
+    {{else}}
+    <br><br><br><br>
+    <p>No withdraws</p>
+    {{/each}}
+  </div>
+</div>
+
+<script src="/js/search.js"></script>

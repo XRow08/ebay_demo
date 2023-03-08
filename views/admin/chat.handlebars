@@ -1,0 +1,143 @@
+{{>_menuAdmin}}
+<div class="sub-bar">
+    <div class="sub-update">
+        <p>Admin | Chat</p>
+    </div>
+    <div class="msg" align="center">
+        <p>{{>_msg}}</p>
+        {{#each erros}}
+        <p>{{text}}</p>
+        {{/each}}
+    </div>
+</div>
+<div class="content-forchat-suport">
+    <div class="suport-infoProduct">
+        <div class="img">
+            <img src="/uploads/{{purchase.productId.image}}" alt="">
+        </div>
+        <div class="about">
+            <h3>{{purchase.productId.title}}</h3>
+            <p><strong>Quantity: </strong>{{purchase.units}} itens</p>
+            <p><strong>Price: </strong>{{purchase.total}}</p>
+            <p><strong>Created At: </strong>{{purchase.createdAt}}</p>
+            {{#if dispute.message}}<p><strong>Cause:</strong> {{dispute.message}}</p>{{/if}}
+        </div>
+        <div class="users">
+            <button id="buyer">Buyer: {{purchase.buyer.username}} </a></button>
+            <button id="seller">Seller: {{purchase.seller.username}}</a></button>
+        </div>
+    </div>
+    <div class="content-chat">
+        <div class="box-messages">
+            <div class="list-messages">
+                <ul class="ul" id="messages">
+                    <li class="li" id="li-messages"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup-user" id="popup-buyer">
+    <div class="popup-chat-user">
+        <div class="card-user">
+            <div class="top">
+                <div class="space"></div>
+                <img src="/images/avatar.svg">
+                <button class="closeButton" id="closeButtonBuyer">Close</button>
+            </div>
+            <div class="about">
+                <div class="left">
+                    <p class="card-title"><strong>Username:</strong> {{purchase.buyer._id.username}}</p>
+                    <p><strong>Role: </strong>
+                        {{#if purchase.buyer._id.isSeller}} Seller{{else}}
+                        {{#if purchase.buyer._id.isAdmin}} Admin{{else}}
+                        {{#if purchase.buyer._id.isSuport}} Suport{{else}}
+                        User
+                        {{/if}}
+                        {{/if}}
+                        {{/if}}
+                    </p>
+                    <p><strong>Wallet:</strong> ${{purchase.buyer._id.wallet}}</p>
+                    <p><strong>Total Disputes: </strong>{{#if
+                        purchase.buyer._id.disputes.length}}{{purchase.buyer._id.disputes.length}}{{else}}0{{/if}} </p>
+                    <button><a href="/admin/user/disputes/{{purchase.buyer._id._id}}" target="_blank">All
+                            Disputes{{purchase.buyer._id.disputeId}}</a></button>
+                </div>
+                <div class="right">
+                    <p><strong>Telegram: </strong> {{#if
+                        purchase.buyer._id.social.Telegram}}{{purchase.buyer._id.social.Telegram}}{{else}}none{{/if}}
+                    </p>
+                    <p><strong>Whatsapp: </strong>{{#if
+                        purchase.buyer._id.social.Whatsapp}}{{purchase.buyer._id.social.Whatsapp}}{{else}}none{{/if}}
+                    </p>
+                    <p><strong>Total Purchases: </strong>{{purchase.buyer._id.purchase.length}}</p>
+                    <button><a href="/admin/user/purchases/{{purchase.buyer._id._id}}" target="_blank">All
+                            Purchases{{purchase.buyer._id.purchaseId}}</a></button>
+                    <button><a href="/admin/user/deposits/{{purchase.buyer._id._id}}" target="_blank">Deposits</a></button>
+                </div>
+            </div>
+            <small><strong>Created At:</strong> {{buyerCreatedAt}}</small>
+        </div>
+    </div>
+</div>
+
+<div class="popup-user" id="popup-seller">
+    <div class="popup-chat-user">
+        <div class="card-user">
+            <div class="top">
+                <div class="space"></div>
+                <img src="/images/avatar.svg">
+                <button class="closeButton" id="closeButtonSeller">Close</button>
+            </div>
+            <div class="about">
+                <div class="left">
+                    <p><strong>Username:</strong> {{purchase.seller._id.username}}</p>
+                    <p><strong>Role: </strong>
+                        {{#if purchase.seller._id.isSeller}} Seller{{else}}
+                        {{#if purchase.seller._id.isAdmin}} Admin{{else}}
+                        {{#if purchase.seller._id.isSuport}} Suport{{else}}
+                        User
+                        {{/if}}
+                        {{/if}}
+                        {{/if}}
+                    </p>
+                    <p><strong>Wallet:</strong> ${{purchase.seller._id.wallet}}</p>
+                    <p><strong>Total Disputes: </strong>{{#if
+                        purchase.seller._id.disputes.length}}{{purchase.seller._id.disputes.length}}{{else}}0{{/if}}
+                    </p>
+                    <button><a href="/admin/user/disputes/{{purchase.seller._id._id}}" target="_blank"
+                            target="_blank">All
+                            Disputes{{purchase.seller._id.disputeId}}</a></button>
+                </div>
+                <div class="right">
+                    <p><strong>Telegram: </strong> {{#if
+                        purchase.seller._id.social.Telegram}}{{purchase.seller._id.social.Telegram}}{{else}}none{{/if}}
+                    </p>
+                    <p><strong>Whatsapp: </strong>{{#if
+                        purchase.seller._id.purchase.seller._id.social.Whatsapp}}{{purchase.seller._id.social.Whatsapp}}{{else}}none{{/if}}
+                    </p>
+                    <p><strong>Total Purchases: </strong>{{purchase.seller._id.purchase.length}}</p>
+                    <button><a href="/admin/user/purchases/{{purchase.seller._id._id}}" target="_blank">All
+                            Purchases{{purchase.seller._id.purchaseId}}</a></button>
+                    <button><a href="/admin/user/withdraw/{{purchase.seller._id._id}}" target="_blank">Withdraws</a></button>
+                </div>
+            </div>
+            <small><strong>Created At:</strong> {{sellerCreatedAt}}</small>
+        </div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    window.nome_usuario = "{{ username }}";
+    window.time = {{ purchase.timeToSell }};
+    window.purchaseId = "{{ purchase._id }}";
+    window.userId = "{{ id }}";
+    window.sellerId = "{{purchase.seller._id._id}}";
+    window.buyerId = "{{purchase.buyer._id._id}}";
+    window.sellerName = "{{purchase.seller._id.username}}";
+    window.buyerName = "{{purchase.buyer._id.username}}";
+</script>
+
+<script src="/js/chat-suport.js"></script>

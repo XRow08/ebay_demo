@@ -1,0 +1,18 @@
+{{>_menu}}
+<div class="sub-bar">
+    <div class="sub-update"><img src="/images/update.svg"><p> News</p>
+        <div id="messagebox"></div>
+    </div>   
+    <div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="msg" align="center"> 
+        {{#each erros}}
+            <p>{{text}}</p>
+        {{/each}}
+    </div>
+    <div class="news">
+        
+    </div>
+</div>
+

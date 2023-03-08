@@ -1,0 +1,33 @@
+{{>_menuSuport}}
+<div class="sub-bar">
+    <p>Suport Disputes</p><div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="products-seller">
+        <h1>All Disputes</h1>
+        {{#each dispute}}
+            <div class="card">
+                <div class="left">
+                    <div class="img"><img src="/uploads/{{productId.image}}" draggable="false"></div>
+                    <div class="about">
+                        <h4>{{productId.title}}</h4>
+                        <small>Cause: {{disputeCause}}</small>
+                        <small>Time to Delivery: {{timeToSell}}hrs</small>
+                        <small>Quantity: {{units}} itens</small>
+                        <h3>$ {{total}}</h3>
+                    </div>
+                </div>
+                <div class="right">
+                    <p class="{{disputeStatus}}"> {{disputeStatus}}</p>
+                    <form action="/suport/getdispute" method="POST">
+                        <input type="hidden" name="disputeId" value="{{disputeId}}">
+                        <button id="two">Get Dispute</button>
+                    </form>
+                </div>
+            </div>
+        {{else}}
+            <br><br><br><br>
+                <p>No Disputes</p>
+        {{/each}}
+    </div>
+</div>

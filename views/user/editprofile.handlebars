@@ -1,0 +1,29 @@
+{{>_menu}}
+    {{>_msg}}
+    <div class="content">
+        <div class="profile">
+            <img src="/images/avatar.svg">
+            <form action="/changepassword" method="post">
+                <h1>Account information</h1>
+                <p><strong>Username:</strong> {{user.username}}</p>
+                <br><br>
+                <label for="currentPassword" >Current Password:</label>
+                    <input type="password" name="currentPassword" id="currentPassword">
+                
+                <label for="newPassword" >New Password:</label>
+                    <input type="password" name="newPassword" id="newPassword">
+
+                <label for="confirmNewPassword">Confirm New Password:</label>
+                    <input type="password" name="confirmNewPassword" id="confirmNewPassword">
+                
+                <button type="submit">Update Password</button>
+            </form>
+             {{#each erros}}
+                <div class="msg" align="center"> 
+                <p>{{text}}</p>
+                </div>
+            {{else}}
+            {{/each}}
+        </div>
+    </div>
+

@@ -1,0 +1,38 @@
+{{>_menu}}
+<div class="sub-bar">
+    <p>See Product</p><div>{{>_msg}}</div>
+</div>
+<div class="content" id="content">
+    <div class="content-product">
+        <div class="desc">
+            <div class="img">
+                <img src="/uploads/{{product.image}}" alt="foto" draggable="false">
+            </div>
+            <br>
+            <hr><br>
+            <h4>Description: </h4>
+            <br>
+            <p align="left">{{product.desc}}</p>
+        </div>
+        <div class="buy">
+            <h4>{{product.title}}</h4>
+            <p>Timing for sale: {{product.timeToSell}}hrs</p>
+            <p>Available Quantity: <span id="quantity">{{product.quantity}} itens</span></p>
+            <p>R$ {{product.price}}/unit</p>
+            
+            <form action="/addPurchase" method="post">
+                <input type="hidden" name="product" value="{{product._id}}">
+                <input type="hidden" name="buyerId" value="{{id}}">
+                <input type="hidden" name="sellerId" value="{{product.seller}}">
+                <div class="quantityChoose">
+                    <label for="units">Quantity:</label>
+                    <input type="number" name="units" min="1" max="{{product.quantity}}" oninput="checkUnits(this)" step="1" value="1">
+                </div>
+                <br>
+                <button type="submit">Purchase</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/shop-product.js"></script>

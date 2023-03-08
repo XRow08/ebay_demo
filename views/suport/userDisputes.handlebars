@@ -1,0 +1,36 @@
+{{>_menuSuport}}
+<div class="sub-bar">
+    <p>Suport | User Disputes</p><div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="products-seller">
+        <h1>Disputes from {{user.username}}  </h1>
+        {{#each dispute}}
+            <div class="card">
+                <div class="left">
+                    <div class="img">
+                        <img src="/uploads/{{purchaseId.productId.image}}" draggable="false">
+                    </div>
+                    <div class="about">
+                        <strong>{{purchaseId.productId.title}}</strong>
+                        <small>Cause: {{message}}</small>
+                        <small>Quantity: {{purchaseId.units}} itens</small>
+                        <p>$ {{purchaseId.total}}</p>
+                        {{#if userWinner}} <p><strong>Result: </strong>Winner</p> {{else}} <p><strong>Result: </strong> Looser</p> {{/if}}
+                    </div>
+                </div>
+                <div class="center">
+                    <button><a href="/suport/user/{{purchaseId.seller._id}}"><strong>Seller: </strong> {{purchaseId.seller.username}}</a></button>
+                    <button><a href="/suport/user/{{purchaseId.buyer._id}}"><strong>Buyer: </strong> {{purchaseId.buyer.username}}</a></button>
+                    <small><strong>Date:</strong> {{createdAt}}</small>
+                </div>
+                <div class="right">
+                    <p class="{{status}}"> {{status}}</p>
+                </div>
+            </div>
+        {{else}}
+            <br><br><br><br>
+                <p>No Disputes</p>
+        {{/each}}
+    </div>
+</div>

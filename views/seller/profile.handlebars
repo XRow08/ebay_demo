@@ -1,0 +1,18 @@
+{{>_menuSeller}}
+    <div class="content">
+        <div class="profile">
+            <img src="/images/avatar.svg">
+            <div class="info">
+                <h1>Account information</h1>
+                <p><strong>Username:</strong>  {{username}}</p>
+                <a href="/seller/profile/edit/{{id}}" align="center">Edit Password</a>
+                <div class="msg" align="center"> 
+                    <p>{{>_msg}}</p>
+                    {{#each erros}}
+                        <p>{{text}}</p>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+

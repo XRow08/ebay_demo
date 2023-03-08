@@ -1,0 +1,34 @@
+{{>_menu}}
+<div class="sub-bar">
+    <p>Seller's Dashboard</p><div>{{>_msg}}</div>
+</div>
+    <div class="content">
+        <div class="profile">
+            <img src="/images/avatar.svg">
+            <form action="/addsocial/{{id}}" method="post">
+                <h1>Social Account</h1>
+                <p><strong>Username:</strong> {{username}}</p>
+                <br><br>
+                <div class="social-media">
+                    <div class="account">
+                        <label for="telegram">Your Telegram account</label>
+                            <input type="text" placeholder="my-user-telegram" name="telegram">
+                    </div>
+
+                    <div class="account">
+                        <label for="whatsapp">Your Whatsapp account</label>
+                            <input type="number" placeholder="(99) 99999-9999" name="whatsapp">
+                    </div>
+                </div>
+
+                <button type="submit" align="center">Create Socials</button>
+                {{#each erros}}
+                    <div class="msg" align="center"> 
+                    <p>{{text}}</p>
+                    </div>
+                {{else}}
+                {{/each}}
+            </form>
+        </div>
+    </div>
+

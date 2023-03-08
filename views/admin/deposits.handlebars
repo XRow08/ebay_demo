@@ -1,0 +1,39 @@
+{{>_menuAdmin}}
+
+<div class="sub-bar">
+  <p>Admin | All Deposits</p>
+  <div>{{>_msg}}</div>
+</div>
+<div class="content">
+  <div class="deposits-admin" id="products">
+    <h1>All Deposits</h1>
+    <div class="search">
+      <div class="left">
+        <small>Filter deposits: </small>
+        <input type="text" id="myFilter" class="form-control" onkeyup="search()" placeholder="Search by a username...">
+      </div>
+      <small>{{deposits.length}} Deposits</small>
+    </div>
+    {{#each deposits}}
+    <div class="card">
+      <div class="left">
+        <img src="/images/deposit.svg" draggable="false">
+        <div class="key">
+          <small><strong class="title">User: {{userUsername}}</strong></small>
+          <small><strong>Date:</strong> {{createdAt}}</small>
+          <small><strong>Value:</strong> R$ {{total}}</small>
+          <small class="pix"><strong>Pix Key:</strong> 12345678901234567890123456789012</small>
+        </div>
+      </div>
+      <div class="right">
+        <small class="{{status}}">{{status}}</small>
+      </div>
+    </div>
+    {{else}}
+    <br><br><br><br>
+    <p>No Deposits</p>
+    {{/each}}
+  </div>
+</div>
+
+<script src="/js/search.js"></script>

@@ -1,0 +1,39 @@
+<div class="header">
+  <div class="logo_header">
+    <a href="/shop">
+      <img src="/images/logoXR.png" alt="img">
+    </a>
+  </div>
+  <div class="navigation_header">
+    <ul class="menu1">
+      <li><a href="/seller/dashboard"><img src="/images/seller.svg">
+          <p>Become a seller</p>
+        </a></li>
+      <li><a href="/dashboard/{{id}}">
+          <p>Amount: R${{#if wallet}}{{wallet}}{{else}}0{{/if}}</p>
+        </a></li>
+      <li><a href="/profile/{{id}}">
+          <p> {{username}}</p><img src="/images/avatar.svg" alt="img">
+        </a></li>
+    </ul>
+    <div class="menu-btn">
+      <img src="/images/menu.svg">
+    </div>
+  </div>
+</div>
+<div class="sidebar">
+  <ul class="menu" id="menu" role="menu">
+    <li><a class="a" href="/dashboard/{{id}}"><img src="/images/seller.svg">
+        Dashboard</a></li>
+    <li><a class="a" href="/shop"><img src="/images/orders.svg"> Shop</a></li>
+    <li><a class="a" href="/purchase/{{id}}"><img src="/images/purchase.svg">
+        Purchases</a></li>
+    <li><a class="a" href="/deposit/{{id}}"><img src="/images/payments.svg">
+        Deposits</a></li>
+    <li><a class="a" href="/profile/{{id}}"><img src="/images/profile.svg">
+        Profile</a></li>
+    <li><a class="a" href="/logout"><img src="/images/logout.svg"> Logout</a></li>
+  </ul>
+</div>
+
+<script src="/js/menu.js"></script>

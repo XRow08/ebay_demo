@@ -1,0 +1,33 @@
+{{>_menuSeller}}
+<div class="sub-bar">
+    <p>Product Information</p>
+</div>
+<div class="content-addproduct">
+    <form action="/seller/newproduct" method="POST" class="form-addproduct" enctype="multipart/form-data">
+        <input type="hidden" name="seller" id="seller" value="{{id}}">
+        <label for="title">Product's Name:</label>
+        <input type="text" name="title" placeholder="My Product" id="title">
+        <label for="desc">Description:</label>
+        <textarea type="text" name="desc" placeholder="Desc of my product" id="desc"></textarea>
+        <label for="timeToSell">Time for sale:</label>
+        <input type="number" min="1" name="timeToSell" placeholder="100hrs" id="timeToSell"></input>
+        <label for="price">Price per item:</label>
+        <input type="number" min="1" name="price" placeholder="10$" id="price">
+        <label for="quantity">Quantity:</label>
+        <input type="number" min="1" step="any" name="quantity" placeholder="50 itens" id="quantity">
+        <div style="display: flex; justify-content:space-between; align-items:baseline">
+            <p>Product Picture: </p>
+            <small>Max 1mb</small>
+        </div>
+        <label class="button-label" for="image" align="center">Send a Picture</label>
+        <input type="file" name="image" id="image" accept="image/png, image/jpg" value="1048576">
+        <button type="submit">Publish</button>
+        {{>_msg}}
+        {{#each erros}}
+        <div class="msg" align="center">
+            <p>{{text}}</p>
+        </div>
+        {{else}}
+        {{/each}}
+    </form>
+</div>

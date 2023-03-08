@@ -1,0 +1,57 @@
+{{>_menuSeller}}
+<div class="sub-bar">
+    <p>Seller's Dashboard</p><div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="dasboard_seller">
+        <h3>R${{#if wallet}}{{wallet}}{{else}}0{{/if}}</h3>
+        <p>Your sales Balance</p>
+        <br>
+        <div class="buttons">
+            <button id="deposit">withdraw</button>
+        </div>
+    </div>
+
+    <div class="popup-wrapper" id="popup-wrapper">
+        <div class="popup-dashboard" id="allDeposits">
+            <h4>Select the way to withdraw: </h4>
+            <div class="buttons">
+                <button class="pix" id="openPixPopup">Pix</button>
+                <button class="monero" id="openBitPopup">Monero</button>
+            </div>
+            <button class="close" onclick="closePopup()">Close</button>
+        </div>
+
+        <div class="popup-dashboard" id="popupPix">
+            <div class="close-buttons">
+                <button class="back" onclick="backPopup()">Go Back</button>
+                <button class="close" onclick="closePopup()">Close</button>
+            </div>
+            <p>Insert your PixKey:</p>
+            <form action="/seller/withdraw" method="post">
+                <input type="hidden" name="username" value="{{username}}">
+                <input type="hidden" name="total" value="{{wallet}}">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="number" name="pixKey" placeholder="Type here...">
+                <button type="submit" class="send">Send</button>
+            </form>
+        </div>
+
+        <div class="popup-dashboard" id="popupBit">
+            <div class="close-buttons">
+                <button class="back" onclick="backPopup()">Go Back</button>
+                <button class="close" onclick="closePopup()">Close</button>
+            </div>
+            <p>Insert your Monero Wallet:</p>
+            <form action="/seller/withdraw" method="post">
+                <input type="hidden" name="username" value="{{username}}">
+                <input type="hidden" name="total" value="{{wallet}}">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="text" name="wallet" placeholder="Type here...">
+                <button type="submit" class="send">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/dashboard-seller.js"></script>

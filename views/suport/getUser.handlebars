@@ -1,0 +1,33 @@
+{{>_menuSuport}}
+<div class="sub-bar">
+    <p>View User</p><div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="card-user">
+        <img src="/images/avatar.svg">
+        <div class="about">
+            <div class="left">
+                <p><strong>Username:</strong> {{user.username}}</p>
+                <p><strong>Role: </strong>
+                    {{#if user.isSeller}} Seller{{else}} 
+                        {{#if user.isAdmin}} Admin{{else}}
+                            {{#if user.isSuport}} Suport{{else}}
+                                User
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                </p>
+                <p><strong>Wallet:</strong>  ${{user.wallet}}</p>
+                <p><strong>Total Disputes: </strong>{{#if user.disputes.length}}{{user.disputes.length}}{{else}}0{{/if}} </p>
+                <button><a href="/suport/userdisputes/{{user._id}}">All Disputes{{disputeId}}</a></button>
+            </div>
+            <div class="right">
+                <p><strong>Telegram: </strong> {{#if user.social.Telegram}}{{user.social.Telegram}}{{else}}none{{/if}} </p>
+                <p><strong>Whatsapp: </strong>{{#if user.social.Whatsapp}}{{user.social.Whatsapp}}{{else}}none{{/if}} </p>
+                <p><strong>Total Purchases: </strong>{{user.purchase.length}}</p>
+                <button><a href="/suport/userpurchases/{{user._id}}">All Purchases{{purchaseId}}</a></button>
+            </div>
+        </div>
+        <small><strong>Created At:</strong> {{createdAt}}</small>
+    </div>
+</div>

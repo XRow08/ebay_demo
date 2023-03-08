@@ -1,0 +1,74 @@
+{{>_menuAdmin}}
+<div class="sub-bar">
+    <p>Admin | Users</p>
+    <div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="admin-users" id="admin-users">
+        <div class="search">
+            <div class="left">
+                <small>Filter user: </small>
+                <input type="text" id="myFilter" class="form-control" onkeyup="search()"
+                    placeholder="Search for a user...">
+            </div>
+            <small>{{users.length}} Users</small>
+        </div>
+        {{#each users}}
+        <div class="card-user">
+            <img src="/images/avatar.svg">
+            <div class="about">
+                <div class="left">
+                    <p class="card-title"><strong>Username:</strong> {{username}}</p>
+                    <p><strong>Role: </strong>
+                        {{#if isSeller}} Seller{{else}}
+                        {{#if isAdmin}} Admin{{else}}
+                        {{#if isSuport}} Suport{{else}}
+                        User
+                        {{/if}}
+                        {{/if}}
+                        {{/if}}
+                    </p>
+                    <p><strong>Wallet:</strong> ${{wallet}}</p>
+                    <p><strong>Total Disputes: </strong>{{disputes.length}}</p>
+                    <button><a href="/admin/user/disputes/{{_id}}" target="_blank">Disputes{{disputeId}}</a></button>
+                </div>
+                <div class="right">
+                    <p><strong>Telegram: </strong>{{#if social.Telegram}}{{social.Telegram}}{{else}}none{{/if}} </p>
+                    <p><strong>Whatsapp: </strong>{{#if social.Whatsapp}}{{social.Whatsapp}}{{else}}none{{/if}} </p>
+                    <p><strong>Total Purchases: </strong>{{purchase.length}}</p>
+                    <button><a href="/admin/user/purchases/{{_id}}" target="_blank">Purchases{{purchaseId}}</a></button>
+                    {{#if isSeller}}
+                        <button><a href="/admin/user/withdraw/{{_id}}" target="_blank">Withdraws</a></button>
+                        {{else}}
+                    {{#if isAdmin}}
+                        {{else}}
+                    {{#if isSuport}}
+                        {{else}}
+                        <button><a href="/admin/user/deposits/{{_id}}" target="_blank">Deposits</a></button>
+                    {{/if}}
+                    {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+            <small><strong>Created At:</strong> {{createdAt}}</small>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    function search() {
+        const input = document.getElementById('myFilter').value.toUpperCase();
+        const cardContainer = document.getElementById('admin-users');
+        const cards = cardContainer.getElementsByClassName('card-user');
+
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].querySelector(".about .left .card-title")
+            if (title.innerText.toUpperCase().indexOf(input) > -0) {
+                cards[i].style.display = "flex";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>

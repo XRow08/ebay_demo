@@ -1,0 +1,40 @@
+{{>_menuSuport}}
+<div class="sub-bar">
+    <p>My Suport Disputes</p><div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="products-seller">
+        <h1>My Disputes</h1>
+        {{#each dispute}}
+            <div class="card">
+                <div class="left">
+                    <div class="img"><img src="/uploads/{{productId.image}}" draggable="false"></div>
+                    <div class="about">
+                        <h4>{{productId.title}}</h4>
+                        <small>Cause: {{disputeCause}}</small>
+                        <small>Time to Delivery: {{productId.timeToSell}}hrs</small>
+                        <small>Quantity: {{units}} itens</small>
+                        <h3>$ {{total}}</h3>
+                    </div>
+                </div>
+                <div class="right buttons {{disputeStatus}}">
+                    <p class="{{disputeStatus}}"> {{disputeStatus}}</p>
+                    <a href="/chat/{{_id}}" style="color: white;"> See Details</a>
+                </div>
+            </div>
+        {{else}}
+            <br><br><br><br>
+                <p>No Disputes</p>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    const buttons = document.querySelectorAll("div .buttons");
+    buttons.forEach(e=> {
+        if (e.classList.contains("Finished")) {
+            e.children[1].href = "#";
+            e.children[1].classList.add("disabled");
+        };
+    });
+</script>

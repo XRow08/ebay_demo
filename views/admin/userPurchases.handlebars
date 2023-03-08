@@ -1,0 +1,44 @@
+{{>_menuAdmin}}
+<div class="sub-bar">
+    <p>Admin | User Purchases</p>
+    <div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="products-seller" id="products">
+        <h1>Purchases from {{user.username}} </h1>
+        <div class="search">
+            <div class="left">
+                <small>Filter purchase: </small>
+                <input type="text" id="myFilter" class="form-control" onkeyup="search()" placeholder="Search for a purchase...">
+            </div>
+            <small>{{purchase.length}} Purchases</small>
+        </div>
+        {{#each purchase}}
+        <div class="card">
+            <div class="left">
+                <div class="img">
+                    <img src="/uploads/{{productId.image}}" draggable="false">
+                </div>
+                <div class="about">
+                    <strong class="title">{{productId.title}}</strong>
+                    <small>Quantity: {{units}}</small>
+                    <small>R$ {{total}}</small>
+                </div>
+            </div>
+            <div class="center">
+                <small><strong>Seller: </strong> {{seller.username}}</small>
+                <small><strong>Date:</strong> {{createdAt}}</small>
+            </div>
+            <div class="right">
+                <p class="{{status}}">{{status}}</p>
+                <a href="/chat/{{_id}}"><p>See Details</p></a>
+            </div>
+        </div>
+        {{else}}
+        <br><br><br><br>
+        <p>No Purchases</p>
+        {{/each}}
+    </div>
+</div>
+
+<script src="/js/search.js"></script>

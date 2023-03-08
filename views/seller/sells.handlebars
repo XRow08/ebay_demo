@@ -1,0 +1,48 @@
+{{>_menuSeller}}
+<div class="sub-bar">
+    <p>My orders</p>
+</div>
+<div class="content">
+    <div class="products-seller">        
+            <p>{{>_msg}}</p>
+            {{#each purchase}}
+                <div class="card">
+                    <div class="left">
+                        <div class="img">
+                            <img src="/uploads/{{image}}" draggable="false">
+                        </div>
+                        <div class="about">
+                            <p>{{title}}</p>
+                            <small>Buyer: {{buyer}}</small>
+                            <small>Date: {{createdAt}}</small>
+                            <small>Quantity: {{units}}</small>
+                            <h3>R$ {{total}}</h3>
+                        </div>
+                    </div>
+                    <div class="right buttons {{purchaseStatus}} {{haveDispute}}">
+                        {{#if haveDispute}}<small style="color: black;">Disputed</small>{{/if}}
+                        <p class="{{purchaseStatus}}"> {{purchaseStatus}}</p>
+                        <a href="/chat/{{purchaseId}}" class="chat-button">
+                            <img src="/images/chat white.svg">
+                            <p>Chat</p>
+                        </a>
+                    </div>
+                </div>
+            {{else}}
+            <br><br><br><br>
+            <p>No sells</p>
+            {{/each}}        
+    </div>
+</div>
+
+<script>
+    const buttons = document.querySelectorAll("div .buttons");
+    buttons.forEach(e=> {
+        if (e.classList.contains("true") && e.classList.contains("Canceled")) {
+            e.children[2].style.display = "none";
+        };
+        if (e.classList.contains("false") && e.classList.contains("Finished")) {
+            e.children[1].style.display = "none";
+        };
+    });
+</script>

@@ -1,0 +1,32 @@
+{{>_menu}}
+<div class="sub-bar">
+    <div class="sub-update"><img src="images/update.svg">
+        <p> Updates</p>
+    </div>
+    <div class="msg" align="center">
+        <p>{{>_msg}}</p>
+        {{#each erros}}
+        <p>{{text}}</p>
+        {{/each}}
+    </div>
+</div>
+<div class="content">
+    <div class="products">
+        {{#each product}}
+        <a href="product/{{_id}}" draggable="false">
+            <div class="card">
+                <div class="img">
+                    <img src="/uploads/{{image}}" draggable="false">
+                </div>
+                <div class="product-about">
+                    <p>{{title}}</p>
+                    <small>Time to delivery: {{timeToSell}}hrs</small>
+                    <h4>R${{price}}</h4>
+                </div>
+            </div>
+        </a>
+        {{else}}
+        <center>No Products</center>
+        {{/each}}
+    </div>
+</div>

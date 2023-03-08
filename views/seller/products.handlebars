@@ -1,0 +1,53 @@
+{{>_menuSeller}}
+<div class="sub-bar">
+    <p>My Products</p>
+    <div class="msg">
+        <p>{{>_msg}}</p>
+    </div>
+</div>
+<div class="content">
+    <div class="products-seller">
+        {{#each product}}
+        <div class="card">
+            <div class="left">
+                <div class="img"><img src="/uploads/{{image}}" draggable="false"></div>
+                <div class="about">
+                    <p>{{title}}</p>
+                    <small>Date: {{createdAt}}</small>
+                    <small>Time to delivery: {{timeToSell}}hrs</small>
+                    <small>Quantity: {{quantity}} itens</small>
+                    <h3>$ {{price}}</h3>
+                </div>
+            </div>
+            <div class="right-seller">
+                <a href="/seller/editproduct/{{_id}}" draggable="false"><img src="/images/pencil.svg" draggable="false">
+                    <p>Edit</p>
+                </a>
+                <a class="two" id="two" product="{{_id}}"><img src="/images/x-circle.svg" draggable="false">
+                    <p>Delete</p>
+                </a>
+            </div>
+        </div>
+
+        {{else}}
+        <br><br><br><br>
+        <p>No Products</p>
+        {{/each}}
+
+        {{!-- POPUP --}}
+        <div class="popup-wrapper" id="popup-wrapper">
+            <div class="popup">
+                <form action="/seller/delete/" class="popup-link" method="post">
+                    <input type="hidden" name="id" class="id-product" value="">
+                    <div class="popup-close" id="popup-close">x</div>
+                    <h2>Confirm delete</h2>
+                    <br>
+                    <hr><br>
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/products.js"></script>

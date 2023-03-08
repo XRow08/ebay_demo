@@ -1,0 +1,44 @@
+{{>_menuAdmin}}
+
+<div class="sub-bar">
+  <p>Admin | All Withdraws</p>
+  <div>{{>_msg}}</div>
+</div>
+<div class="content">
+  <div class="deposits-admin" id="products">
+    <h1>All Withdraws</h1>
+    
+    <div class="search">
+      <div class="left">
+        <small>Filter withdraws: </small>
+        <input type="text" id="myFilter" class="form-control" onkeyup="search()" placeholder="Search by a username...">
+      </div>
+      <small>{{withdraws.length}} Withdraws</small>
+      <form action="/admin/payment" method="post">
+        <button type="submit">Pay</button>
+      </form>
+    </div>
+    {{#each withdraws}}
+    <div class="card">
+      <div class="left">
+        <img src="/images/withdraw.svg" draggable="false">
+        <div class="key">
+          <small><strong class="title">Seller: {{userUsername}}</strong></small>
+          <small><strong>Date: </strong>{{createdAt}}</small>
+          <small><strong>Value:</strong> R${{total}}</small>
+          {{#if wallet}}<small><strong>Wallet:</strong> {{wallet}}</small>{{/if}}
+          {{#if pixKey}}<small><strong>Pix Key:</strong> {{pixKey}}</small>{{/if}}
+        </div>
+      </div>
+      <div class="right">
+        <small class="{{status}}">{{status}}</small>
+      </div>
+    </div>
+    {{else}}
+    <br><br><br><br>
+    <p>No withdraws</p>
+    {{/each}}
+  </div>
+</div>
+
+<script src="/js/search.js"></script>

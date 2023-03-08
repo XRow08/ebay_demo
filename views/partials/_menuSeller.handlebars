@@ -1,0 +1,38 @@
+<div class="header">
+  <div class="logo_header">
+    <a href="/shop">
+      <img src="/images/logoXR.png" alt="img">
+    </a>
+  </div>
+  <div class="navigation_header">
+    <ul class="menu1">
+      <li><a href="/seller/dashboard"><img src="/images/seller.svg" draggable="false" />
+          <p>Dashboard</p>
+        </a></li>
+
+      <li><a href="/seller/dashboard">
+          <p>Amount: R${{#if wallet}}{{wallet}}{{else}}0{{/if}}</p>
+        </a></li>
+
+      <li><a href="/seller/profile/{{id}}">
+          <p> {{username}}</p><img src="/images/avatar.svg" alt="img" draggable="false" />
+        </a></li>
+    </ul>
+    <div class="menu-btn">
+      <img src="/images/menu.svg" />
+    </div>
+  </div>
+</div>
+<div class="sidebar">
+  <ul class="menu">
+    <li><a class="a" href="/seller/dashboard"><img src="/images/seller.svg" />Dashboard</a></li>
+    <li><a class="a" href="/seller/addproduct"><img src="/images/sell.svg" />Add a Product</a></li>
+    <li><a class="a" href="/seller/products"><img src="/images/edit.svg" />See Products</a></li>
+    <li><a class="a" href="/seller/sells"><img src="/images/payments.svg" />Sells</a></li>
+    <li><a class="a" href="/seller/withdraw/{{id}}"><img src="/images/orders.svg" />Withdraws</a></li>
+    <li><a class="a" href="/seller/profile/{{id}}"><img src="/images/profile.svg" />Profile</a></li>
+    <li><a class="a" href="/logout"><img src="/images/logout.svg" />Logout</a></li>
+  </ul>
+</div>
+
+<script src="/js/menu.js"></script>

@@ -1,0 +1,53 @@
+{{>_menuAdmin}}
+<div class="sub-bar">
+    <p>Admin | User Disputes</p>
+    <div>{{>_msg}}</div>
+</div>
+<div class="content">
+    <div class="products-seller" id="products">
+        <h1>Disputes from {{user.username}} </h1>
+        <div class="search">
+            <div class="left">
+                <small>Filter disputes: </small>
+                <input type="text" id="myFilter" class="form-control" onkeyup="search()"
+                    placeholder="Search for a dispute...">
+            </div>
+            <small>{{dispute.length}} Disputes</small>
+        </div>
+        {{#each dispute}}
+        <div class="card">
+            <div class="left">
+                <div class="img">
+                    <img src="/uploads/{{purchaseId.productId.image}}" draggable="false">
+                </div>
+                <div class="about">
+                    <strong class="title">{{purchaseId.productId.title}}</strong>
+                    <small>Cause: {{message}}</small>
+                    <small>Quantity: {{purchaseId.units}} itens</small>
+                    <small>R$ {{purchaseId.total}}</small>
+                    {{#if userWinner}} 
+                    <small><strong>Result: </strong>Winner</small> 
+                    {{else}} 
+                    <small><strong>Result: </strong>
+                    Looser</small> 
+                    {{/if}}
+                </div>
+            </div>
+            <div class="center">
+                <small><strong>Seller: </strong> {{purchaseId.seller.username}}</small>
+                <small><strong>Buyer: </strong> {{purchaseId.buyer.username}}</small>
+                <small><strong>Date:</strong> {{createdAt}}</small>
+            </div>
+            <div class="right">
+                <p class="{{status}}"> {{status}}</p>
+                <a href="/chat/{{purchaseId._id}}"><p>See Details</p></a>
+            </div>
+        </div>
+        {{else}}
+        <br><br><br><br>
+        <p>No Disputes</p>
+        {{/each}}
+    </div>
+</div>
+
+<script src="/js/search.js"></script>

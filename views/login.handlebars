@@ -1,0 +1,22 @@
+<section class="login">
+    <h1 class="iceland">EBAY</h1>
+    <div class="div-login">
+        <form action="/login" method="post" class="form-login">
+            <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required>
+            
+            <label for="password" >Password:</label>
+                <input type="password" name="password" id="password" required>
+            
+            <button type="submit">Access</button>
+        </form>
+    </div>
+    <div class="icon">
+        <img src="images/user.svg" alt="">
+        <a href="/add"><h3>CREATE AN ACCOUNT</h3></a>
+    </div>
+    <div class="msg"> 
+        <p> {{>_msg}} </p>
+        <p> {{res.data.error}} </p>
+    </div>
+</section>
